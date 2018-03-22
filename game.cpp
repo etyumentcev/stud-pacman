@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> 
 
 
 using namespace std;
@@ -13,29 +13,49 @@ void Setup()
 {
 }
 
-void Draw()
+class Figure
 {
-	system("cls");
-	for (int i = 0; i < width; i++) {
-		cout << "#";
-	}
-	cout << endl;
+public:
+	virtual void Draw() = 0;;
 
-	for (int i = 0; i < height; i++) {
-		for (int j = 0; j < width; j++) {
-			if (j == 0 || j == width-1)
-				cout << "#";
-			else {
-					cout << " ";
-			}
+};
+
+class GameFieldImpl : public Figure
+{
+	Figure *background;
+
+public:
+	GameFieldImpl()
+	{
+		Draw();
+	}
+
+	virtual void Draw()
+	{
+
+		system("cls");
+		for (int i = 0; i < width; i++) {
+			cout << "#";
 		}
 		cout << endl;
-	}
 
-	for (int i = 0; i < width ; i++) {
-		cout << "#";
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				if (j == 0 || j == width - 1)
+					cout << "#";
+				else {
+					cout << " ";
+				}
+			}
+			cout << endl;
+		}
+
+		for (int i = 0; i < width; i++) {
+			cout << "#";
+		}
 	}
-}
+};
+
 
 void Input()
 {
@@ -51,7 +71,8 @@ int main()
 
 	while (!gameOver)
 	{
-		Draw();
+		GameFieldImpl a;
+		//Draw(); 
 		Input();
 		Logic();
 	}
